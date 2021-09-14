@@ -11,8 +11,7 @@ namespace Tutorials
             string input = Console.ReadLine();
 
             System.Console.WriteLine($"You typed: {input}");
-
-        
         }
+        
     }
 }
