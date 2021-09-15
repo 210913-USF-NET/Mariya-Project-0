@@ -1,4 +1,5 @@
 ﻿using System;
+using Models;
 
 namespace UI
 {
@@ -6,7 +7,7 @@ namespace UI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("My Store");
         }
     }
 }
