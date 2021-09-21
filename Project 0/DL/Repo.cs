@@ -2,7 +2,7 @@
 
 namespace DL
 {
-    public class Repo : IRepo
+    public class Repo// :IRepo
     {
     }
 }

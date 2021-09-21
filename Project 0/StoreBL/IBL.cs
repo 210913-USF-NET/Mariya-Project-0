@@ -1,4 +1,4 @@
-namespace .
+namespace StoreBL
 {
     public interface IBL
     {
