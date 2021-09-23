@@ -7,13 +7,50 @@ namespace StoreBL
 {
     public class BL : IBL
     {
-        public List<StoreFront> GetAllStoreFronts { get; set; }
-
         private IRepo _repo;
-
-        public BL(IRepo repo){
+        public BL(IRepo repo)
+        {
             _repo = repo;
         }
-        public int MyProperty { get; set; }
+
+        public Customer AddCustomer(Customer newCustomer)
+        {
+            return _repo.AddCustomer(newCustomer);
+        }
+
+        public LineItem AddLineItem(LineItem newItem)
+        {
+            return _repo.AddLineItem(newItem);
+        }
+
+        public Order AddOrder(Order newOrder)
+        {
+            return _repo.AddOrder(newOrder);
+        }
+
+        public List<Customer> GetAllCustomers()
+        {
+            return _repo.GetAllCustomers();
+        }
+
+        public List<Inventory> GetAllInventories(int storeId)
+        {
+            return _repo.GetAllInventories(storeId);
+        }
+
+        public List<LineItem> GetAllLineItems(int input)
+        {
+            return _repo.GetAllLineItems(input);
+        }
+
+        public List<Order> GetAllOrders()
+        {
+            return _repo.GetAllOrders();
+        }
+
+        public Inventory UpdateStoreInventory(Inventory newInventory)
+        {
+            return _repo.UpdateStoreInventory(newInventory);
+        }
     }
 }
