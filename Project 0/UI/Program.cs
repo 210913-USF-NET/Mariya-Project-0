@@ -1,5 +1,6 @@
 ﻿using System;
 using Models;
+using Serilog;
 
 namespace UI
 {
@@ -7,7 +8,17 @@ namespace UI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("My Store");
+            Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File("../logs/logs.txt", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
+
+            Log.Information("Application Starting...");
+            
+            new MainMenu().Start();
+
+            Log.Information("Application closing...");
+            Log.CloseAndFlush();
         }
     }
 }

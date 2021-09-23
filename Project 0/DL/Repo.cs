@@ -5,13 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Entity = DL.Entities;
-using Models;
+
 
 namespace DL
 {
     public class Repo : IRepo
     {
-        private Entities.Project00Context _context;
+        private Entity.Project00Context _context;
         public Repo(Entity.Project00Context context)
         {
             _context = context;

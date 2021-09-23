@@ -3,29 +3,31 @@ using Models;
 
 namespace UI
 {
-    public class MainMenu :IMenu
+    public class CustomerNavigation : IMenuCust
     {
-        private Customer customer;
-         public void Start()
+        public void Start(Customer shopper)
         {
             bool exit = false;
             string input = "";
             do
             {
-                Console.WriteLine("Welcome to Books4All");
-                Console.WriteLine("[1] Log in to your account");
-                Console.WriteLine("[2] Register new user");
+                Console.WriteLine($"Welcome {shopper.Name}");
+                Console.WriteLine("[1] Start a new cart");
+                Console.WriteLine("[2] View shopping history");
+                Console.WriteLine("[3] Change your default store");
                 Console.WriteLine("[x] Exit");
                 input = Console.ReadLine();
 
                 switch (input)
                 {
                     case "1":
-                        ViewAllCustomers();
-                        CustomerNavigation();
+                        StartNewOrder();
                         break;
                     case "2":
-                        CreateNewCustomer();
+                        ViewOrderHistory();
+                        break;
+                        case "3":
+                        ChangeCustomerStore();
                         break;
                     case "x":
                         Console.WriteLine("Have a great day!");
@@ -36,14 +38,19 @@ namespace UI
                         break;
                 }
             } while (!exit);
-     }
+        }
 
-        private void ViewAllCustomers()
+        private void ChangeCustomerStore()
         {
             throw new NotImplementedException();
         }
 
-        private void CreateNewCustomer()
+        private void ViewOrderHistory()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void StartNewOrder()
         {
             throw new NotImplementedException();
         }

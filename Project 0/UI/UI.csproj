@@ -2,8 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj" />
-    <ProjectReference Include="..\BL\BL.csproj" />
     <ProjectReference Include="..\DL\DL.csproj" />
+    <ProjectReference Include="..\StoreBL\BL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -11,7 +11,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
 
   <PropertyGroup>
