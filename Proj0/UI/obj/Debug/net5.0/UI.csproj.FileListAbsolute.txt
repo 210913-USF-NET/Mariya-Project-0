@@ -1,0 +1,16 @@
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\bin\Debug\net5.0\UI.exe
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\bin\Debug\net5.0\UI.deps.json
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\bin\Debug\net5.0\UI.runtimeconfig.json
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\bin\Debug\net5.0\UI.runtimeconfig.dev.json
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\bin\Debug\net5.0\UI.dll
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\bin\Debug\net5.0\ref\UI.dll
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\bin\Debug\net5.0\UI.pdb
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\obj\Debug\net5.0\UI.csproj.AssemblyReference.cache
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\obj\Debug\net5.0\UI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\obj\Debug\net5.0\UI.AssemblyInfoInputs.cache
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\obj\Debug\net5.0\UI.AssemblyInfo.cs
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\obj\Debug\net5.0\UI.csproj.CoreCompileInputs.cache
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\obj\Debug\net5.0\UI.dll
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\obj\Debug\net5.0\ref\UI.dll
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\obj\Debug\net5.0\UI.pdb
+C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Proj0\UI\obj\Debug\net5.0\UI.genruntimeconfig.cache

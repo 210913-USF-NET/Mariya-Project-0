@@ -7,16 +7,16 @@ namespace DL
 {
     public interface IRepo
     {
-        List<Customer> GetAllCustomers();
-        List<Customer> FindCustomerByName();
+        // List<Customer> GetAllCustomers();
+        Customer FindOneCustomer(string qryString);
         Customer AddCustomer(Customer newCustomer);
-        List<Inventory> GetAllInventories(int storeId);
-        Inventory UpdateStoreInventory(Inventory newInventory);
-        LineItem AddLineItem(LineItem newItem);
-        List<LineItem> GetAllLineItems(int input);
+       // List<Inventory> GetAllInventories(int storeId);
+        // Inventory UpdateStoreInventory(Inventory newInventory);
+        // LineItem AddLineItem(LineItem newItem);
+        // List<LineItem> GetAllLineItems(int input);
 
-        Order AddOrder(Order newOrder);
-        List<Order> GetAllOrders();
+        // Order AddOrder(Order newOrder);
+        // List<Order> GetAllOrders();
 
     }
 }

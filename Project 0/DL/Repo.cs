@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Entity = DL.Entities;
+using DL;
 
 
 namespace DL
@@ -19,7 +20,7 @@ namespace DL
 
         public Models.Customer AddCustomer(Models.Customer newCustomer)
         {
-            Entity.Customer custToAdd = new Entity.Customer(){
+            Entity.Customer customerToAdd = new Entity.Customer(){
                // CustomerId = newCustomer.CustomerId, ----should I add or just get from DB?
                 CustomerName = newCustomer.Name,
                 CustomerEmail = newCustomer.Email,
@@ -29,80 +30,36 @@ namespace DL
                 CustomerStore = newCustomer.CustomerDefaultStoreID
             };
 
-            custToAdd = _context.Add(custToAdd).Entity;
+            customerToAdd = _context.Add(customerToAdd).Entity;
             _context.SaveChanges();
+            _context.ChangeTracker.Clear();
 
             return new Models.Customer(){
-                CustomerId = custToAdd.CustomerId,
-                Name = custToAdd.CustomerName,
-                Email = custToAdd.CustomerEmail,
-                UserName = custToAdd.CustomerUserName,
-                Password = custToAdd.CustomerPassWord,
-                Address = custToAdd.CustomerAddress,
-                CustomerDefaultStoreID= custToAdd.CustomerStore
+                CustomerId = customerToAdd.CustomerId,
+                Name = customerToAdd.CustomerName,
+                Email = customerToAdd.CustomerEmail,
+                UserName = customerToAdd.CustomerUserName,
+                Password = customerToAdd.CustomerPassWord,
+                Address = customerToAdd.CustomerAddress,
+                CustomerDefaultStoreID= customerToAdd.CustomerStore
             };
         }
 
-        public Models.LineItem AddLineItem(Models.LineItem newItem)
+        public Customer FindOneCustomer(string qryString)
         {
-           Entity.LineItem lineToAdd = new Entity.LineItem(){
-               OrderId1 = newItem.OrderID,
-               // need to maybe create order 1st then 
-               //add from order because order ID needs to be created 1st
-               //store line items in list and then once order created add to 
-               //line item list and remove from inventory...?
-               OrderProductQantity = newItem.Quantity,
-               OrderInvenId = newItem.Item.ProductId,
-                };
-           lineToAdd = _context.Add(lineToAdd).Entity;
-           _context.SaveChanges();
-           return new Models.LineItem(){
-               OrderID = lineToAdd.OrderId1,
-               Quantity = (int)lineToAdd.OrderProductQantity,
-            //    Item = lineToAdd.OrderId1Navigation.Select()
+            Entity.Customer cutByUsername = _context.Customers.FirstOrDefault(u => u.CustomerUserName.Equals(qryString));
 
-
-           };
-        }
-
-        // public Models.Order AddOrder(Models.Order newOrder)
-        // {
-        //     Entity.Order orderToAdd = new Entity.Order(){
-        //         OrderAccountId = newOrder.CustomerID,
-        //         OrderInvenId = newOrder.LineItems.
-        //     }
-        // }
-
-        public List<Models.Customer> GetAllCustomers()
-        {
-            throw new NotImplementedException();
-            Entity.Customer customerByName = new Entity.Customer(){
-
+            return new Models.Customer(){
+                CustomerId = cutByUsername.CustomerId,
+                Name = cutByUsername.CustomerName,
+                UserName = cutByUsername.CustomerUserName,
+                Password = cutByUsername.CustomerPassWord,
+                Email = cutByUsername.CustomerEmail,
+                Address = cutByUsername.CustomerAddress,
+                CustomerDefaultStoreID = cutByUsername.CustomerStore
             };
-        }
-        List<Customer> FindCustomerByName()
-        {
-            throw new NotImplementedException();
-        }
 
-        public List<Inventory> GetAllInventories(int storeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<LineItem> GetAllLineItems(int input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Order> GetAllOrders()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Inventory UpdateStoreInventory(Inventory newInventory)
-        {
-            throw new NotImplementedException();
         }
     }
+
 }

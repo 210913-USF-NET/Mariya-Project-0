@@ -18,39 +18,43 @@ namespace StoreBL
             return _repo.AddCustomer(newCustomer);
         }
 
-        public LineItem AddLineItem(LineItem newItem)
+        // public LineItem AddLineItem(LineItem newItem)
+        // {
+        //     return _repo.AddLineItem(newItem);
+        // }
+
+        // public Order AddOrder(Order newOrder)
+        // {
+        //     return _repo.AddOrder(newOrder);
+        // }
+
+        // public List<Customer> GetAllCustomers()
+        // {
+        //     return _repo.GetAllCustomers();
+        // }
+        public Customer FindOneCustomer(string qryString)
         {
-            return _repo.AddLineItem(newItem);
+            return _repo.FindOneCustomer(qryString);
         }
 
-        public Order AddOrder(Order newOrder)
-        {
-            return _repo.AddOrder(newOrder);
-        }
+        // public List<Inventory> GetAllInventories(int storeId)
+        // {
+        //     return _repo.GetAllInventories(storeId);
+        // }
 
-        public List<Customer> GetAllCustomers()
-        {
-            return _repo.GetAllCustomers();
-        }
+        // public List<LineItem> GetAllLineItems(int input)
+        // {
+        //     return _repo.GetAllLineItems(input);
+        // }
 
-        public List<Inventory> GetAllInventories(int storeId)
-        {
-            return _repo.GetAllInventories(storeId);
-        }
+        // public List<Order> GetAllOrders()
+        // {
+        //     return _repo.GetAllOrders();
+        // }
 
-        public List<LineItem> GetAllLineItems(int input)
-        {
-            return _repo.GetAllLineItems(input);
-        }
-
-        public List<Order> GetAllOrders()
-        {
-            return _repo.GetAllOrders();
-        }
-
-        public Inventory UpdateStoreInventory(Inventory newInventory)
-        {
-            return _repo.UpdateStoreInventory(newInventory);
-        }
+        // public Inventory UpdateStoreInventory(Inventory newInventory)
+        // {
+        //     return _repo.UpdateStoreInventory(newInventory);
+        //}
     }
 }

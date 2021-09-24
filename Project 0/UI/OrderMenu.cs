@@ -2,7 +2,7 @@ using Models;
 
 namespace UI
 {
-    public class ShoppingMenu : IMenuCust
+    public class OrderMenu : IMenuCust
     {
         public void Start(Customer shopper)
         {
