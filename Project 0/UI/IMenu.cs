@@ -2,6 +2,6 @@ namespace UI
 {
     public interface IMenu
     {
-         void Start();
+        void Start();
     }
 }

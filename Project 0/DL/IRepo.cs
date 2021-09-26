@@ -8,9 +8,10 @@ namespace DL
     public interface IRepo
     {
         // List<Customer> GetAllCustomers();
-        Customer FindOneCustomer(string qryString);
+        List<Customer> FindOneCustomer(string qryString);
         Customer AddCustomer(Customer newCustomer);
-       // List<Inventory> GetAllInventories(int storeId);
+        List<Inventory> GetInventoryByStoreID(Customer newCustomer);
+        List<StoreFront> GetStoreFronts();
         // Inventory UpdateStoreInventory(Inventory newInventory);
         // LineItem AddLineItem(LineItem newItem);
         // List<LineItem> GetAllLineItems(int input);

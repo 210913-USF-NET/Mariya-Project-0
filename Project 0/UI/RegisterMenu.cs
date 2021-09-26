@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Models;
 using StoreBL;
 
@@ -21,7 +22,6 @@ namespace UI
             {
                 Main:
                 Console.WriteLine("[1] Start registration");
-                Console.WriteLine("[2] Cancel");
                 Console.WriteLine("[x] Go to Main Menu");
                 input = Console.ReadLine();
 
@@ -29,9 +29,7 @@ namespace UI
                 {
                     case "1":
                         CreateNewCustomer();
-                        break;
-                    case "2":
-                        exit = true;
+                        // MenuFactory.GetMenuCust("account");
                         break;
                     case "x":
                         Console.WriteLine("Have a great day!");
@@ -45,41 +43,36 @@ namespace UI
 
         }
 
-        private Customer CreateNewCustomer(){
+        private void CreateNewCustomer(){
             Customer newCustomer = new Customer();
-
+            List <StoreFront> chooseStore = _bl.GetStoreFronts();
+            
             Console.WriteLine("Creating a new user");
-
             Console.WriteLine("\nEnter your first and last name: ");
-            string name = Console.ReadLine();
-            newCustomer.Name = name;
-
+            newCustomer.Name = Console.ReadLine();
             Console.WriteLine("\nEnter a username: ");
-            string username = Console.ReadLine();
-            newCustomer.UserName = username;
-
+            newCustomer.UserName = Console.ReadLine();
             Console.WriteLine("\nEnter a password: ");
-            string password = Console.ReadLine();
-            newCustomer.Password = password;
-
+            newCustomer.Password = Console.ReadLine();
             Console.WriteLine("\nEnter an email address: ");
-            string email = Console.ReadLine();
-            newCustomer.Email = email;
-
+            newCustomer.Email = Console.ReadLine();
             Console.WriteLine("\nEnter your Address :");
-            string address = Console.ReadLine();
-            newCustomer.Address = address;
-
-            Console.WriteLine("\nEnter your StoreID:");
+            newCustomer.Address = Console.ReadLine();
+            System.Console.WriteLine("List of stores available:");
+            foreach (var item in chooseStore)
+            {
+                System.Console.WriteLine(item);
+            }
+            Console.WriteLine("Enter your preferred StoreID:");
             int store = Convert.ToInt32(Console.ReadLine());
             newCustomer.CustomerDefaultStoreID = store;
-            
             Customer addedCustomer = _bl.AddCustomer(newCustomer);
             System.Console.WriteLine($"You created {addedCustomer}");
     
             // Console.WriteLine($"\nYou created {newCustomer}");
-            return addedCustomer;
-
+            MenuFactory.GetMenuCust("account").Start(addedCustomer);
+            
+            
         }
     }
 }

@@ -7,8 +7,9 @@ namespace StoreBL
     {
         // List<Customer> GetAllCustomers();
         Customer AddCustomer(Customer newCustomer);
-        Customer FindOneCustomer(string qryString);
-        // List<Inventory> GetAllInventories(int storeId);
+        List<Customer> FindOneCustomer(string qryString);
+        List<Inventory> GetInventoryByStoreID(Customer newCustomer);
+        List<StoreFront> GetStoreFronts();
         // Inventory UpdateStoreInventory(Inventory newInventory);
         // LineItem AddLineItem(LineItem newItem);
         // List<LineItem> GetAllLineItems(int input);

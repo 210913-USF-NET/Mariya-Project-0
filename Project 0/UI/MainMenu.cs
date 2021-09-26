@@ -14,10 +14,10 @@ namespace UI
             string input = "";
             do
             {
+                Console.WriteLine("Welcome to Books A Billion");
                 Main:
                 Console.WriteLine("[1] Log-in an existing user");
                 Console.WriteLine("[2] Register new user");
-                Console.WriteLine("[3] Admin Log-in");
                 Console.WriteLine("[x] Exit");
                 input = Console.ReadLine();
 
@@ -32,10 +32,6 @@ namespace UI
                         MenuFactory.GetMenu("register").Start();
                         // new CustomerNavigation().Start(newCustomer);
                         break;
-                        // case "3":
-                        // ViewAllCustomers();
-                        // new AdminMenu().Start(newCustomer);
-                        // break;
                     case "x":
                         Console.WriteLine("Have a great day!");
                         exit = true;

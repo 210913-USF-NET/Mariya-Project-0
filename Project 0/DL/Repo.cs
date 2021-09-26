@@ -45,20 +45,58 @@ namespace DL
             };
         }
 
-        public Customer FindOneCustomer(string qryString)
+        public List<Customer> FindOneCustomer(string qryString)
         {
-            Entity.Customer cutByUsername = _context.Customers.FirstOrDefault(u => u.CustomerUserName.Equals(qryString));
+            return _context.Customers.Where(u => u.CustomerUserName.Contains(qryString) || u.CustomerName.Contains(qryString)).Select(
+                x => new Models.Customer(){
+                    CustomerId = x.CustomerId,
+                    Name = x.CustomerName,
+                    UserName = x.CustomerUserName,
+                    Password = x.CustomerPassWord,
+                    Email = x.CustomerEmail,
+                    Address = x.CustomerAddress,
+                    CustomerDefaultStoreID = x.CustomerStore
+            }
+            ).ToList();
+        }
 
-            return new Models.Customer(){
-                CustomerId = cutByUsername.CustomerId,
-                Name = cutByUsername.CustomerName,
-                UserName = cutByUsername.CustomerUserName,
-                Password = cutByUsername.CustomerPassWord,
-                Email = cutByUsername.CustomerEmail,
-                Address = cutByUsername.CustomerAddress,
-                CustomerDefaultStoreID = cutByUsername.CustomerStore
-            };
+        public List<Inventory> GetInventoryByStoreID(Customer newCustomer)
+        {
 
+            return _context.Inventories.Where(y => y.InvenStoreId == newCustomer.CustomerDefaultStoreID).Select(z => new Models.Inventory ()
+            {
+                StoreID = z.InvenStoreId,
+                Quantity = z.InventoryQuantity,
+                ProductID = z.InvenProductId,
+            }
+            ).ToList();
+
+
+            // Entity.Inventory storeById = _context.Inventories.Include(x => x.InvenProduct).FirstOrDefault(y => y.InvenStoreId== newCustomer.CustomerDefaultStoreID);
+            // //StoreFronts.Include(r => r.Inventories).ThenInclude(s => s.InvenProduct).FirstOrDefault(y => y.StoreId == newCustomer.CustomerDefaultStoreID);
+
+            // return new Models.Inventory(){
+            //     StoreID = storeById.InvenStoreId,
+            //     StoreName = storeById.InvenStore.StoreName,
+            //     Name = storeById,
+            //     Address = storeById.StoreAddress,
+            //     Inventories = storeById.Inventories.Select(y => new Models.Product(){
+            //         StoreID = y.InvenStoreId,
+            //         ProductID = y.InvenProductId,
+            //         Quantity = y.InvenProductId,
+            //     }).ToList()
+            // };
+
+        }
+
+        public List<StoreFront> GetStoreFronts()
+        {
+            return _context.StoreFronts.Select(r => new Models.StoreFront()
+            {
+                StoreID = r.StoreId,
+                Name = r.StoreName,
+                Address = r.StoreAddress
+            }).ToList();
         }
     }
 

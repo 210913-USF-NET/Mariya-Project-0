@@ -14,11 +14,11 @@ namespace DL.Entities
 
         public int OrderId { get; set; }
         public int OrderAccountId { get; set; }
-        public int OrderInvenId { get; set; }
+        public int OrderStoreId { get; set; }
+        public decimal OrderTotal { get; set; }
         public DateTime OrderDate { get; set; }
 
-        public virtual Customer OrderAccount { get; set; }
-        public virtual Inventory OrderInven { get; set; }
+        public virtual Customer OrderNavigation { get; set; }
         public virtual ICollection<LineItem> LineItems { get; set; }
     }
 }

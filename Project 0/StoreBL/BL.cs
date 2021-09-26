@@ -32,11 +32,18 @@ namespace StoreBL
         // {
         //     return _repo.GetAllCustomers();
         // }
-        public Customer FindOneCustomer(string qryString)
+        public List<Customer> FindOneCustomer(string qryString)
         {
             return _repo.FindOneCustomer(qryString);
         }
-
+        public List<Inventory> GetInventoryByStoreID(Customer newCustomer)
+        {
+            return _repo.GetInventoryByStoreID(newCustomer);
+        }
+        public List<StoreFront> GetStoreFronts()
+        {
+            return _repo.GetStoreFronts();
+        }
         // public List<Inventory> GetAllInventories(int storeId)
         // {
         //     return _repo.GetAllInventories(storeId);

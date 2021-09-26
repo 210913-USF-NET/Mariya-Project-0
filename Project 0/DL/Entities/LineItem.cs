@@ -7,11 +7,13 @@ namespace DL.Entities
 {
     public partial class LineItem
     {
-        public int OrderId1 { get; set; }
-        public int OrderInvenId { get; set; }
+        public int LineItemId { get; set; }
+        public int LineOrderId { get; set; }
+        public int LineStoreId { get; set; }
+        public int LineInvenProdId { get; set; }
         public int? OrderProductQantity { get; set; }
 
-        public virtual Order OrderId1Navigation { get; set; }
-        public virtual Inventory OrderInven { get; set; }
+        public virtual Inventory Line { get; set; }
+        public virtual Order LineOrder { get; set; }
     }
 }

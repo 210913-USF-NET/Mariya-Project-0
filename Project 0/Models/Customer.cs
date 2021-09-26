@@ -5,7 +5,9 @@ namespace Models
 {
     public class Customer
     {
-        public Customer(){}
+        public Customer(){
+            this.CustomerDefaultStoreID = 100;
+        }
 
         public Customer(string name) : this ()
         {
@@ -28,5 +30,10 @@ namespace Models
         public string Address { get; set; }
         public int CustomerDefaultStoreID { get; set; }
         public List<Order> Orders { get; set; }
+
+        public override string ToString()
+        {
+            return $"Customer Id: {this.CustomerId}, Name: {this.Name}, UserName: {this.UserName}, Email: {this.Email}, Address: {this.Address}, Preferred Store: {this.CustomerDefaultStoreID}";
+        }
     }
 }

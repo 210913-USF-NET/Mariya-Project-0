@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Models;
 using StoreBL;
+using System.Linq;
 
 namespace UI
 {
@@ -20,8 +22,8 @@ namespace UI
             do
             {
                 Main:
-                Console.WriteLine("[1] To continue login");
-                Console.WriteLine("[2] Cancel");
+                Console.WriteLine("[1] Log as Customer");
+                Console.WriteLine("[2] log in as Admin");
                 Console.WriteLine("[x] Go to Main Menu");
                 input = Console.ReadLine();
 
@@ -29,9 +31,10 @@ namespace UI
                 {
                     case "1":
                         ValidateExistingCustomer();
+                        MenuFactory.GetMenuCust("account");
                         break;
                     case "2":
-                        exit = true;
+                        ValidateAdmin();
                         break;
                     case "x":
                         Console.WriteLine("Have a great day!");
@@ -45,18 +48,49 @@ namespace UI
 
         }
 
-        private Customer ValidateExistingCustomer(){
+        private void ValidateExistingCustomer(){
             Start:
             Console.WriteLine("Enter your username");
             string useName = Console.ReadLine();
 
-            Customer user = _bl.FindOneCustomer(useName);
-            if(!useName.Equals(user.UserName))
+            var users = _bl.FindOneCustomer(useName);
+            if(users == null || users.Count == 0)
             {
                 Console.WriteLine("No such users :/");
-                goto Start;
             }
-            return user;
+           
+            Customer loggedIn = new Customer();
+            loggedIn = users.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
+            Console.WriteLine($"Welcome {loggedIn.Name}!");
+            
+            // foreach(Customer u in users){
+            //     System.Console.WriteLine($"Hello {u.Name}");
+            // }
+        
+
+            MenuFactory.GetMenuCust("account").Start(loggedIn);
+            
+        }
+
+         private void ValidateAdmin(){
+          
+            Console.WriteLine("Enter your username");
+            string useName = Console.ReadLine();
+            if( !useName.Equals("Admin")){
+                System.Console.WriteLine("That is not a valid input");
+                return;
+            }
+            var users = _bl.FindOneCustomer(useName);
+            Customer loggedIn = new Customer();
+            loggedIn = users.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
+            Console.WriteLine($"Welcome {loggedIn.Name}!");
+            
+            // foreach(Customer u in users){
+            //     System.Console.WriteLine($"Hello {u.Name}");
+            // }
+        
+
+            // MenuFactory.GetMenu("admin").Start();
         
         }
     }
