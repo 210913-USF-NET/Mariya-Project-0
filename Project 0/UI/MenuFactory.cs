@@ -59,23 +59,21 @@ namespace UI
 
             switch (menuString.ToLower()) 
             {
-               
-                
                 // case "admin":
                     // return new AdminMenu(new BL(new Repo(context)));
                     case "account":
                     return new CustomerNavigation(new BL(new Repo(context)));
                     case "order menu":
                     return new OrderMenu(new BL(new Repo(context)));
+                    // case "shopping":
+                    // return new ShoppingCart(new BL(new Repo(context)));
+                    //  case
+                    // return new OrderMenu(new BL(new Repo(context)));
+                    //  case
+                    // return new OrderMenu(new BL(new Repo(context)));
+                    //  case:
+                    // return new OrderMenu(new BL(new Repo(context)));
                     default:
-                    // return new OrderMenu(new BL(new Repo(context)));
-                    // default:
-                    // return new OrderMenu(new BL(new Repo(context)));
-                    // default:
-                    // return new OrderMenu(new BL(new Repo(context)));
-                    // default:
-                    // return new OrderMenu(new BL(new Repo(context)));
-                    // default:
                     return null;
             }
         }

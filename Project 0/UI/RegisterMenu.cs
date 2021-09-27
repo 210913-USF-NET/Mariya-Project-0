@@ -46,12 +46,19 @@ namespace UI
         private void CreateNewCustomer(){
             Customer newCustomer = new Customer();
             List <StoreFront> chooseStore = _bl.GetStoreFronts();
-            
-            Console.WriteLine("Creating a new user");
+            Console.WriteLine("**********************************************************");
+            Console.WriteLine("\n           Creating a new user");
+            Console.WriteLine("**********************************************************");
             Console.WriteLine("\nEnter your first and last name: ");
-            newCustomer.Name = Console.ReadLine();
+            string name = Console.ReadLine();
+            newCustomer.Name = name;
             Console.WriteLine("\nEnter a username: ");
-            newCustomer.UserName = Console.ReadLine();
+            string userName = Console.ReadLine();
+            if(userName.Contains("admin")){
+                System.Console.WriteLine("That si not a valid name please choose another");
+            }
+            // else if(userName.Contains)
+            newCustomer.UserName = userName;
             Console.WriteLine("\nEnter a password: ");
             newCustomer.Password = Console.ReadLine();
             Console.WriteLine("\nEnter an email address: ");
@@ -67,8 +74,9 @@ namespace UI
             int store = Convert.ToInt32(Console.ReadLine());
             newCustomer.CustomerDefaultStoreID = store;
             Customer addedCustomer = _bl.AddCustomer(newCustomer);
-            System.Console.WriteLine($"You created {addedCustomer}");
-    
+            Console.WriteLine("**********************************************************");
+            System.Console.WriteLine($"           You created {addedCustomer}");
+            Console.WriteLine("**********************************************************");
             // Console.WriteLine($"\nYou created {newCustomer}");
             MenuFactory.GetMenuCust("account").Start(addedCustomer);
             

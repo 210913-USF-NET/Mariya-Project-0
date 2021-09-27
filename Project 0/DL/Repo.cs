@@ -18,6 +18,9 @@ namespace DL
             _context = context;
         }
 
+        
+
+
         public Models.Customer AddCustomer(Models.Customer newCustomer)
         {
             Entity.Customer customerToAdd = new Entity.Customer(){
@@ -60,32 +63,41 @@ namespace DL
             ).ToList();
         }
 
-        public List<Inventory> GetInventoryByStoreID(Customer newCustomer)
+        public StoreFront GetMyStore(Customer cust)
         {
-
-            return _context.Inventories.Where(y => y.InvenStoreId == newCustomer.CustomerDefaultStoreID).Select(z => new Models.Inventory ()
+            Entity.StoreFront myStore = _context.StoreFronts.FirstOrDefault(x => x.StoreId == cust.CustomerDefaultStoreID);
+            return new Models.StoreFront()
             {
-                StoreID = z.InvenStoreId,
-                Quantity = z.InventoryQuantity,
-                ProductID = z.InvenProductId,
-            }
-            ).ToList();
+                StoreID = myStore.StoreId,
+                Name = myStore.StoreName,
+                Address = myStore.StoreAddress
+            };
+        }
 
+        public List<Inventory> GetInventoryByStoreID(Customer newCustomer)
+        {   
+            // Entity.Product prodByID =
 
-            // Entity.Inventory storeById = _context.Inventories.Include(x => x.InvenProduct).FirstOrDefault(y => y.InvenStoreId== newCustomer.CustomerDefaultStoreID);
-            // //StoreFronts.Include(r => r.Inventories).ThenInclude(s => s.InvenProduct).FirstOrDefault(y => y.StoreId == newCustomer.CustomerDefaultStoreID);
+            return  _context.Inventories.Where(y => y.InvenStoreId== newCustomer.CustomerDefaultStoreID).Select(i => new Models.Inventory()
+            {
+                StoreID = i.InvenStoreId,
+                Quantity = i.InventoryQuantity,
+                ProductID = i.InvenProductId,
+            }).ToList();
+        //StoreFronts.Include(r => r.Inventories).ThenInclude(s => s.InvenProduct).FirstOrDefault(y => y.StoreId == newCustomer.CustomerDefaultStoreID);
 
-            // return new Models.Inventory(){
-            //     StoreID = storeById.InvenStoreId,
-            //     StoreName = storeById.InvenStore.StoreName,
-            //     Name = storeById,
-            //     Address = storeById.StoreAddress,
-            //     Inventories = storeById.Inventories.Select(y => new Models.Product(){
-            //         StoreID = y.InvenStoreId,
-            //         ProductID = y.InvenProductId,
-            //         Quantity = y.InvenProductId,
-            //     }).ToList()
-            // };
+        //     return new Models.Inventory(){
+        //         StoreID = storeById.InvenStoreId,
+        //         Quantity = storeById.InventoryQuantity,
+        //         ProductID = storeById.InvenProductId,
+        //         // Item = storeById.InvenProduct.
+        //     // Address = storeById.StoreAddress,
+        //     // Inventories = storeById.Inventories.Select(y => new Models.Product(){
+        //     //     StoreID = y.InvenStoreId,
+        //     //     ProductID = y.InvenProductId,
+        //     //     Quantity = y.InvenProductId,
+        //     // }).ToList()
+        // };
 
         }
 
@@ -98,6 +110,19 @@ namespace DL
                 Address = r.StoreAddress
             }).ToList();
         }
+
+        public List<Product> ProductsList()
+        {
+            return _context.Products.Select(r => new Models.Product()
+            {
+                ProductId =r.ProductId,
+                Name = r.ProductName,
+                Price = r.ProductPrice,
+                Genre = r.ProductGenere,
+                Description = r.ProductDescription
+            }).ToList();
+        }
+
     }
 
 }

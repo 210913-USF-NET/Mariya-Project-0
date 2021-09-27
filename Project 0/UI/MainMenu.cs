@@ -14,7 +14,9 @@ namespace UI
             string input = "";
             do
             {
-                Console.WriteLine("Welcome to Books A Billion");
+                Console.WriteLine("**********************************************************");
+                Console.WriteLine("           Welcome to Books A Billion");
+                Console.WriteLine("**********************************************************");
                 Main:
                 Console.WriteLine("[1] Log-in an existing user");
                 Console.WriteLine("[2] Register new user");
@@ -43,47 +45,6 @@ namespace UI
             } while (!exit);
      }
 
-/// <summary>
-/// Prompts log in and checks input against what is in the DB
-/// </summary>
-/// <returns>Cutomer model from DB</returns>
-   
-        // private void CreateNewCustomer(){
-        //     Customer newCustomer = new Customer();
-
-        //     Console.WriteLine("Creating a new user");
-
-        //     Console.WriteLine("\nEnter your first and last name: ");
-        //     string name = Console.ReadLine();
-        //     newCustomer.Name = name;
-
-        //     Console.WriteLine("\nEnter a username: ");
-        //     string username = Console.ReadLine();
-        //     newCustomer.UserName = username;
-
-        //     Console.WriteLine("\nEnter a password: ");
-        //     string password = Console.ReadLine();
-        //     newCustomer.Password = password;
-
-        //     Console.WriteLine("\nEnter an email address: ");
-        //     string email = Console.ReadLine();
-        //     newCustomer.Email = email;
-
-        //     Console.WriteLine("\nEnter your Address :");
-        //     string address = Console.ReadLine();
-        //     newCustomer.Address = address;
-
-        //     Console.WriteLine("\nEnter your StoreID:");
-        //     int store = Convert.ToInt32(Console.ReadLine());
-        //     newCustomer.CustomerDefaultStoreID = store;
-            
-        //     Customer addedCustomer = _bl.AddCustomer(newCustomer);
-        //     System.Console.WriteLine($"You created {addedCustomer}");
-    
-        //     // Console.WriteLine($"\nYou created {newCustomer}");
-        //     // return addedCustomer;
-
-        // }
       
     }
 }

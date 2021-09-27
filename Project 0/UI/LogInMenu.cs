@@ -50,7 +50,7 @@ namespace UI
 
         private void ValidateExistingCustomer(){
             Start:
-            Console.WriteLine("Enter your username");
+            Console.WriteLine("\nEnter your username");
             string useName = Console.ReadLine();
 
             var users = _bl.FindOneCustomer(useName);
@@ -61,8 +61,9 @@ namespace UI
            
             Customer loggedIn = new Customer();
             loggedIn = users.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
-            Console.WriteLine($"Welcome {loggedIn.Name}!");
-            
+            Console.WriteLine("**********************************************************");
+            Console.WriteLine($"           Welcome {loggedIn.Name}!");
+            Console.WriteLine("**********************************************************");
             // foreach(Customer u in users){
             //     System.Console.WriteLine($"Hello {u.Name}");
             // }
@@ -83,14 +84,11 @@ namespace UI
             var users = _bl.FindOneCustomer(useName);
             Customer loggedIn = new Customer();
             loggedIn = users.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
+            Console.WriteLine("**********************************************************");
             Console.WriteLine($"Welcome {loggedIn.Name}!");
-            
-            // foreach(Customer u in users){
-            //     System.Console.WriteLine($"Hello {u.Name}");
-            // }
+            Console.WriteLine("**********************************************************");
+            MenuFactory.GetMenuCust("admin").Start(loggedIn);
         
-
-            // MenuFactory.GetMenu("admin").Start();
         
         }
     }
