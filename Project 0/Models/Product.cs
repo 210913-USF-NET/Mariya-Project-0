@@ -9,7 +9,7 @@ namespace Models
         public string Description { get; set; }
          public override string ToString()
         {
-            return $"Product Name: {this.Name}\nProduct Id: {this.ProductId} Product Price: {this.Price}\nProduct Genre: {this.Genre}\nProduct Description: {this.Description}\n";
+            return $"Product Name: {this.Name}\nProduct Id: {this.ProductId} Product Price: {this.Price:C}\nProduct Genre: {this.Genre}\nProduct Description: {this.Description}\n";
         }
     }
 }

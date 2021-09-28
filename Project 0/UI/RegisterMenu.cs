@@ -20,7 +20,6 @@ namespace UI
             string input = "";
             do
             {
-                Main:
                 Console.WriteLine("[1] Start registration");
                 Console.WriteLine("[x] Go to Main Menu");
                 input = Console.ReadLine();
@@ -54,8 +53,8 @@ namespace UI
             newCustomer.Name = name;
             Console.WriteLine("\nEnter a username: ");
             string userName = Console.ReadLine();
-            if(userName.Contains("admin")){
-                System.Console.WriteLine("That si not a valid name please choose another");
+            if(userName.Contains("Admin")){
+                System.Console.WriteLine("That is not a valid name please choose another");
             }
             // else if(userName.Contains)
             newCustomer.UserName = userName;

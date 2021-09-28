@@ -7,6 +7,7 @@ namespace Models
     {
         public int OrderId { get; set; }
         public int CustomerID { get; set; }
+        public int StoreID { get; set; }
         public List<LineItem> LineItems { get; set; }
         public List<Product> Products { get; set; }
         public decimal Total { get; set; }

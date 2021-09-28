@@ -80,15 +80,16 @@ namespace DL.Entities
 
             modelBuilder.Entity<LineItem>(entity =>
             {
+                entity.HasKey(e => new { e.LineOrderId, e.LineStoreId, e.LineInvenProdId })
+                    .HasName("PKLineITem_ID");
+
                 entity.ToTable("LineItem");
-
-                entity.Property(e => e.LineItemId).HasColumnName("LineItemID");
-
-                entity.Property(e => e.LineInvenProdId).HasColumnName("LineInvenProdID");
 
                 entity.Property(e => e.LineOrderId).HasColumnName("LineOrderID");
 
                 entity.Property(e => e.LineStoreId).HasColumnName("LineStoreID");
+
+                entity.Property(e => e.LineInvenProdId).HasColumnName("LineInvenProdID");
 
                 entity.HasOne(d => d.LineOrder)
                     .WithMany(p => p.LineItems)
@@ -126,13 +127,7 @@ namespace DL.Entities
             {
                 entity.ToTable("Product");
 
-                entity.Property(e => e.ProductDescription).HasMaxLength(200);
-
-                entity.Property(e => e.ProductGenere).HasMaxLength(200);
-
-                entity.Property(e => e.ProductName)
-                    .IsRequired()
-                    .HasMaxLength(20);
+                entity.Property(e => e.ProductName).IsRequired();
 
                 entity.Property(e => e.ProductPrice).HasColumnType("smallmoney");
             });

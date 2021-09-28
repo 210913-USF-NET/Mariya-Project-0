@@ -17,7 +17,7 @@ namespace UI
                 Console.WriteLine("**********************************************************");
                 Console.WriteLine("           Welcome to Books A Billion");
                 Console.WriteLine("**********************************************************");
-                Main:
+                
                 Console.WriteLine("[1] Log-in an existing user");
                 Console.WriteLine("[2] Register new user");
                 Console.WriteLine("[x] Exit");

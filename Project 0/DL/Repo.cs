@@ -18,9 +18,6 @@ namespace DL
             _context = context;
         }
 
-        
-
-
         public Models.Customer AddCustomer(Models.Customer newCustomer)
         {
             Entity.Customer customerToAdd = new Entity.Customer(){
@@ -76,29 +73,12 @@ namespace DL
 
         public List<Inventory> GetInventoryByStoreID(Customer newCustomer)
         {   
-            // Entity.Product prodByID =
-
             return  _context.Inventories.Where(y => y.InvenStoreId== newCustomer.CustomerDefaultStoreID).Select(i => new Models.Inventory()
             {
                 StoreID = i.InvenStoreId,
                 Quantity = i.InventoryQuantity,
                 ProductID = i.InvenProductId,
             }).ToList();
-        //StoreFronts.Include(r => r.Inventories).ThenInclude(s => s.InvenProduct).FirstOrDefault(y => y.StoreId == newCustomer.CustomerDefaultStoreID);
-
-        //     return new Models.Inventory(){
-        //         StoreID = storeById.InvenStoreId,
-        //         Quantity = storeById.InventoryQuantity,
-        //         ProductID = storeById.InvenProductId,
-        //         // Item = storeById.InvenProduct.
-        //     // Address = storeById.StoreAddress,
-        //     // Inventories = storeById.Inventories.Select(y => new Models.Product(){
-        //     //     StoreID = y.InvenStoreId,
-        //     //     ProductID = y.InvenProductId,
-        //     //     Quantity = y.InvenProductId,
-        //     // }).ToList()
-        // };
-
         }
 
         public List<StoreFront> GetStoreFronts()
@@ -123,6 +103,104 @@ namespace DL
             }).ToList();
         }
 
+        public Product GetProduct(int input)
+        {
+            Entity.Product myProduct = _context.Products.FirstOrDefault(x => x.ProductId == input);
+            return new Models.Product(){
+                ProductId = myProduct.ProductId,
+                Price = myProduct.ProductPrice,
+                Name = myProduct.ProductName,
+                Genre = myProduct.ProductGenere,
+                Description = myProduct.ProductDescription
+            };
+        }
+
+        public Order AddNewOrder(Order newOrd)
+        {
+            Entity.Order orderToAdd = new Entity.Order(){
+                OrderAccountId = newOrd.CustomerID,
+                OrderTotal = newOrd.Total,
+                OrderStoreId = newOrd.StoreID,
+            };
+            orderToAdd = _context.Add(orderToAdd).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            // Entity.Order addedOrder = _context.Orders.LastOrDefault();
+            return new Models.Order
+            {
+                OrderId = orderToAdd.OrderId,
+                CustomerID = orderToAdd.OrderAccountId,
+                Total = orderToAdd.OrderTotal,
+                Date = orderToAdd.OrderDate
+            };
+
+        }
+        /// <summary>
+        /// Takes a list of inventory from my
+        /// </summary>
+        /// <param name="items"></param>
+        public void InventorToUpdate(List<Models.Inventory> items)
+        {
+            foreach(Models.Inventory item in items)
+            {
+                
+                Entities.Inventory updatedInventory = (from i in _context.Inventories
+                    where i.InvenProductId == item.ProductID && i.InvenStoreId == item.StoreID 
+                    select i).SingleOrDefault();
+
+                updatedInventory.InventoryQuantity = item.Quantity;
+            }
+            // List<Entity.Inventory> InvenToUpdate = items.Select(i => Entity.Inventory(){
+            //     InvenStoreId = i.StoreID,
+            //     InvenProductId = i.ProductID,
+            //     InventoryQuantity = i.Quantity}).ToList();
+                
+            // _context.Inventories.UpdateRange(InvenToUpdate);
+            _context.SaveChanges();
+            // _context.ChangeTracker.Clear();
+        }
+        public void AddLineItems(List<LineItem> items)
+        {
+            foreach(Models.LineItem i in items)
+            {
+                Entity.LineItem lineToAdd = new Entity.LineItem(){
+                LineOrderId = i.OrderID,
+                LineStoreId = i.StoreId,
+                LineInvenProdId = i.ProductID,
+                OrderProductQantity = i.Quantity
+            };
+            lineToAdd = _context.Add(lineToAdd).Entity;
+            }
+            // List<Entity.Inventory> InvenToUpdate = items.Select(i => Entity.Inventory(){
+            //     InvenStoreId = i.StoreID,
+            //     InvenProductId = i.ProductID,
+            //     InventoryQuantity = i.Quantity}).ToList();
+                
+            // _context.Inventories.UpdateRange(InvenToUpdate);
+            _context.SaveChanges();
+            // List<Entity.LineItem> itemsToAdd = items.Select(i => new Entity.LineItem(){
+            //     LineOrderId = i.OrderID,
+            //     LineStoreId = i.StoreId,
+            //     LineInvenProdId = i.ProductID,
+            //     OrderProductQantity = i.Quantity}).ToList();
+                
+            // _context.LineItems.AddRange(itemsToAdd);
+            // _context.SaveChanges();
+            // _context.ChangeTracker.Clear();
+        }
+
+        public List<Order> ListOfOrdersByCust(Customer cust)
+        {
+            return _context.Orders.Where(x => x.OrderStoreId == cust.CustomerDefaultStoreID).Select(r => new Models.Order()
+            {
+                OrderId =r.OrderId,
+                CustomerID = r.OrderAccountId,
+                StoreID = r.OrderStoreId,
+                Total = r.OrderTotal,
+                Date = r.OrderDate
+            }).ToList();
+        }
     }
 
 }

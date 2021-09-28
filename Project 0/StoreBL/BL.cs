@@ -17,21 +17,10 @@ namespace StoreBL
         {
             return _repo.AddCustomer(newCustomer);
         }
-
-        // public LineItem AddLineItem(LineItem newItem)
-        // {
-        //     return _repo.AddLineItem(newItem);
-        // }
-
-        // public Order AddOrder(Order newOrder)
-        // {
-        //     return _repo.AddOrder(newOrder);
-        // }
-
-        // public List<Customer> GetAllCustomers()
-        // {
-        //     return _repo.GetAllCustomers();
-        // }
+        public Product GetProduct(int input)
+        {
+            return _repo.GetProduct(input);
+        }
         public List<Customer> FindOneCustomer(string qryString)
         {
             return _repo.FindOneCustomer(qryString);
@@ -43,7 +32,7 @@ namespace StoreBL
 
         public StoreFront GetMyStore(Customer cust)
         {
-           return _repo.GetMyStore(cust);
+            return _repo.GetMyStore(cust);
         }
 
         public List<StoreFront> GetStoreFronts()
@@ -54,24 +43,25 @@ namespace StoreBL
         {
             return _repo.ProductsList();
         }
-        // public List<Inventory> GetAllInventories(int storeId)
-        // {
-        //     return _repo.GetAllInventories(storeId);
-        // }
 
-        // public List<LineItem> GetAllLineItems(int input)
-        // {
-        //     return _repo.GetAllLineItems(input);
-        // }
+        public Order AddNewOrder(Order newOrd)
+        {
+            return _repo.AddNewOrder(newOrd);
+        }
 
-        // public List<Order> GetAllOrders()
-        // {
-        //     return _repo.GetAllOrders();
-        // }
+        public void AddLineItems(List<LineItem> items)
+        {
+            _repo.AddLineItems(items);
+        }
 
-        // public Inventory UpdateStoreInventory(Inventory newInventory)
-        // {
-        //     return _repo.UpdateStoreInventory(newInventory);
-        //}
+        public void InventorToUpdate(List<Inventory> items)
+        {
+             _repo.InventorToUpdate(items);
+        }
+
+        public List<Order> ListOfOrdersByCust(Customer cust)
+        {
+            return _repo.ListOfOrdersByCust(cust);
+        }
     }
 }

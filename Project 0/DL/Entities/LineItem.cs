@@ -7,7 +7,6 @@ namespace DL.Entities
 {
     public partial class LineItem
     {
-        public int LineItemId { get; set; }
         public int LineOrderId { get; set; }
         public int LineStoreId { get; set; }
         public int LineInvenProdId { get; set; }

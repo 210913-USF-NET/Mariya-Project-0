@@ -21,7 +21,6 @@ namespace UI
             string input = "";
             do
             {
-                Main:
                 Console.WriteLine("[1] Log as Customer");
                 Console.WriteLine("[2] log in as Admin");
                 Console.WriteLine("[x] Go to Main Menu");
@@ -49,7 +48,7 @@ namespace UI
         }
 
         private void ValidateExistingCustomer(){
-            Start:
+            
             Console.WriteLine("\nEnter your username");
             string useName = Console.ReadLine();
 
@@ -85,7 +84,7 @@ namespace UI
             Customer loggedIn = new Customer();
             loggedIn = users.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
             Console.WriteLine("**********************************************************");
-            Console.WriteLine($"Welcome {loggedIn.Name}!");
+            Console.WriteLine($"           Welcome {loggedIn.Name}!");
             Console.WriteLine("**********************************************************");
             MenuFactory.GetMenuCust("admin").Start(loggedIn);
         
