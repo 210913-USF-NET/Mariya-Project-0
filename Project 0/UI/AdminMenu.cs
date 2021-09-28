@@ -13,7 +13,7 @@ namespace UI
             {
                 Console.WriteLine($"Welcome Admin");
                 Console.WriteLine("[1] Add new Location");
-                Console.WriteLine("[2] View location order history");
+                Console.WriteLine("[2] Order History Menu");
                 Console.WriteLine("[3] update inventory");
                 Console.WriteLine("[4] Search existing customers");
                 Console.WriteLine("[x] Exit");

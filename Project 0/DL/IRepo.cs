@@ -7,7 +7,7 @@ namespace DL
 {
     public interface IRepo
     {
-        // List<Customer> GetAllCustomers();
+        List<Customer> GetAllCustomers();
         List<Customer> FindOneCustomer(string qryString);
         Customer AddCustomer(Customer newCustomer);
         List<Product> ProductsList();
@@ -19,6 +19,8 @@ namespace DL
         void InventorToUpdate(List<Models.Inventory> items);
         void AddLineItems(List<LineItem> items);
         List<Order> ListOfOrdersByCust(Customer cust);
+        List<Order> ListOrder();
+        List<LineItem> LineItemsList();
 
     }
 }

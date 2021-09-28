@@ -137,7 +137,7 @@ namespace DL
 
         }
         /// <summary>
-        /// Takes a list of inventory from my
+        /// Takes a list of inventory created in UI and adds in a foreach loop
         /// </summary>
         /// <param name="items"></param>
         public void InventorToUpdate(List<Models.Inventory> items)
@@ -192,7 +192,7 @@ namespace DL
 
         public List<Order> ListOfOrdersByCust(Customer cust)
         {
-            return _context.Orders.Where(x => x.OrderStoreId == cust.CustomerDefaultStoreID).Select(r => new Models.Order()
+            return _context.Orders.Where(x => x.OrderAccountId == cust.CustomerId).Select(r => new Models.Order()
             {
                 OrderId =r.OrderId,
                 CustomerID = r.OrderAccountId,
@@ -200,6 +200,43 @@ namespace DL
                 Total = r.OrderTotal,
                 Date = r.OrderDate
             }).ToList();
+        }
+        public List<LineItem> LineItemsList()
+        {
+            return _context.LineItems.Select(i => new Models.LineItem()
+            {
+                OrderID = i.LineOrderId,
+                ProductID = i.LineInvenProdId,
+                StoreId = i.LineStoreId,
+                Quantity = (int)i.OrderProductQantity
+            }).ToList();
+        }
+
+        public List<Order> ListOrder()
+        {
+            return _context.Orders.Select(r => new Models.Order()
+            {
+                OrderId =r.OrderId,
+                CustomerID = r.OrderAccountId,
+                StoreID = r.OrderStoreId,
+                Total = r.OrderTotal,
+                Date = r.OrderDate
+            }).ToList();
+        } 
+
+        public List<Customer> GetAllCustomers()
+        {
+            return _context.Customers.Select(
+                x => new Models.Customer(){
+                    CustomerId = x.CustomerId,
+                    Name = x.CustomerName,
+                    UserName = x.CustomerUserName,
+                    Password = x.CustomerPassWord,
+                    Email = x.CustomerEmail,
+                    Address = x.CustomerAddress,
+                    CustomerDefaultStoreID = x.CustomerStore
+            }
+            ).ToList();
         }
     }
 

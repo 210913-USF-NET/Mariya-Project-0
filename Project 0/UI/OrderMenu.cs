@@ -169,18 +169,6 @@ namespace UI
         //call BL/DL method to create order in DB -> and make sure you are getting that id of the new order
         //once you have the id
         List<LineItem> lineitems = new List<LineItem>();
-        //in here, we are translating the cart into the list of lineitems
-        // foreach(KeyValuePair<Product, int> item in ShoppingCart.MyCart)
-        // {
-        //     lineitems.Add(new LineItem(){
-        //         OrderID = Orderid,
-        //         StoreId = storeid,
-        //         ProductID = prodid,
-        //         Quantity = quan
-        //     });
-        // }
-        //call addLineItems method that takes in List<Lineitem>
-        //and in dl, you can do somethign like _context.LineItems.AddRange(thewholelist)
         System.Console.WriteLine($"Thank you for your purchase {cust.Name}!");
         System.Console.WriteLine("Your Order contains:");
         return newOrd;

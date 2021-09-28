@@ -50,16 +50,25 @@ namespace UI
         private void ValidateExistingCustomer(){
             
             Console.WriteLine("\nEnter your username");
-            string useName = Console.ReadLine();
-
-            var users = _bl.FindOneCustomer(useName);
-            if(users == null || users.Count == 0)
+            string useName = Console.ReadLine().ToLower().Trim();
+            List<Customer> existingCust = _bl.FindOneCustomer(useName);
+            foreach(Customer user in existingCust){
+                if (!user.UserName.ToLower().Trim().Contains(useName))
+                {
+                    System.Console.WriteLine("That is not a valid username please input a correct username or Register as a new user");
+                    return;
+                }
+            }
+            if(existingCust == null || existingCust.Count == 0)
             {
                 Console.WriteLine("No such users :/");
             }
-           
+            else if (useName.ToLower().Trim().Equals("admin")){
+                ValidateAdmin();
+            }
+
             Customer loggedIn = new Customer();
-            loggedIn = users.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
+            loggedIn = existingCust.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
             Console.WriteLine("**********************************************************");
             Console.WriteLine($"           Welcome {loggedIn.Name}!");
             Console.WriteLine("**********************************************************");
@@ -73,22 +82,25 @@ namespace UI
         }
 
          private void ValidateAdmin(){
-          
-            Console.WriteLine("Enter your username");
-            string useName = Console.ReadLine();
-            if( !useName.Equals("Admin")){
-                System.Console.WriteLine("That is not a valid input");
+            Console.WriteLine("Enter Administrator Log In");
+            string useName = Console.ReadLine().ToLower().Trim();
+            List<Customer> existingCust = _bl.FindOneCustomer(useName);
+            foreach(Customer user in existingCust){
+                if (!user.UserName.ToLower().Trim().Equals("admin"))
+                {
+                    System.Console.WriteLine("Please enter Admin log in credentials");
+                    return;
+                }
+            }
+            if(existingCust == null || existingCust.Count == 0)
+            {
+                Console.WriteLine("No such users :/");
                 return;
             }
-            var users = _bl.FindOneCustomer(useName);
+            
             Customer loggedIn = new Customer();
-            loggedIn = users.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
-            Console.WriteLine("**********************************************************");
-            Console.WriteLine($"           Welcome {loggedIn.Name}!");
-            Console.WriteLine("**********************************************************");
+            loggedIn = existingCust.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
             MenuFactory.GetMenuCust("admin").Start(loggedIn);
-        
-        
         }
     }
 }

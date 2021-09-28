@@ -43,20 +43,42 @@ namespace UI
         }
 
         private void CreateNewCustomer(){
+            List<Customer> existingCust = _bl.GetAllCustomers();
             Customer newCustomer = new Customer();
             List <StoreFront> chooseStore = _bl.GetStoreFronts();
             Console.WriteLine("**********************************************************");
-            Console.WriteLine("\n           Creating a new user");
+            Console.WriteLine("           Creating a new user");
             Console.WriteLine("**********************************************************");
             Console.WriteLine("\nEnter your first and last name: ");
             string name = Console.ReadLine();
+            foreach(Customer user in existingCust)
+            {
+                if (user.Name.ToLower().Trim().Equals(name.ToLower().Trim()))
+                {
+                    System.Console.WriteLine("That Name is already registered please log in or enter a different name");
+                    return;
+                }
+            }
             newCustomer.Name = name;
+            if(existingCust == null || existingCust.Count == 0)
+            {
+                Console.WriteLine("No such users :/");
+                return;
+            }
+            //need to go through and search for existing customers by name and username
             Console.WriteLine("\nEnter a username: ");
             string userName = Console.ReadLine();
-            if(userName.Contains("Admin")){
-                System.Console.WriteLine("That is not a valid name please choose another");
+            foreach(Customer user in existingCust){
+                if (user.UserName.ToLower().Trim().Equals(userName.ToLower().Trim()))
+                {
+                    System.Console.WriteLine("That User Name is already registered please log in or enter a different name");
+                    return;
+                }
+                else if (!user.UserName.ToLower().Trim().Equals("admin")){
+                    System.Console.WriteLine("You are trying to register Admin that is not possible");
+                    return;
+                }
             }
-            // else if(userName.Contains)
             newCustomer.UserName = userName;
             Console.WriteLine("\nEnter a password: ");
             newCustomer.Password = Console.ReadLine();
@@ -64,6 +86,7 @@ namespace UI
             newCustomer.Email = Console.ReadLine();
             Console.WriteLine("\nEnter your Address :");
             newCustomer.Address = Console.ReadLine();
+            findStore:
             System.Console.WriteLine("List of stores available:");
             foreach (var item in chooseStore)
             {
@@ -71,6 +94,13 @@ namespace UI
             }
             Console.WriteLine("Enter your preferred StoreID:");
             int store = Convert.ToInt32(Console.ReadLine());
+            foreach (var item in chooseStore)
+            {
+                if(!(store == item.StoreID)){
+                    System.Console.WriteLine("That is not a valid entry try again");
+                    goto findStore;
+                }
+            }
             newCustomer.CustomerDefaultStoreID = store;
             Customer addedCustomer = _bl.AddCustomer(newCustomer);
             Console.WriteLine("**********************************************************");

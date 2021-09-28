@@ -56,12 +56,27 @@ namespace StoreBL
 
         public void InventorToUpdate(List<Inventory> items)
         {
-             _repo.InventorToUpdate(items);
+            _repo.InventorToUpdate(items);
         }
 
         public List<Order> ListOfOrdersByCust(Customer cust)
         {
             return _repo.ListOfOrdersByCust(cust);
+        }
+
+        public List<LineItem> LineItemsList()
+        {
+            return _repo.LineItemsList();
+        }
+
+        public List<Order> ListOrder()
+        {
+            return _repo.ListOrder();
+        }
+
+        public List<Customer> GetAllCustomers()
+        {
+            return _repo.GetAllCustomers();
         }
     }
 }

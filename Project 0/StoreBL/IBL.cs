@@ -5,10 +5,10 @@ namespace StoreBL
 {
     public interface IBL
     {
-        // List<Customer> GetAllCustomers();
+        List<Customer> GetAllCustomers();
         Customer AddCustomer(Customer newCustomer);
         List<Customer> FindOneCustomer(string qryString);
-         List<Inventory> GetInventoryByStoreID(Customer newCustomer);
+        List<Inventory> GetInventoryByStoreID(Customer newCustomer);
         List<StoreFront> GetStoreFronts();
         List<Product> ProductsList();
         StoreFront GetMyStore(Customer cust);
@@ -17,11 +17,9 @@ namespace StoreBL
         void AddLineItems(List <LineItem> items);
         void InventorToUpdate(List<Models.Inventory> items);
         List<Order> ListOfOrdersByCust(Customer cust);
-        // Inventory UpdateStoreInventory(Inventory newInventory);
-        // LineItem AddLineItem(LineItem newItem);
-        // List<LineItem> GetAllLineItems(int input);
-        // Order AddOrder(Order newOrder);
-        // List<Order> GetAllOrders();
+        List<LineItem> LineItemsList();
+        List<Order> ListOrder();
+        
 
     }
 }

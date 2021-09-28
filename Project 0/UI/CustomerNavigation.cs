@@ -69,13 +69,29 @@ namespace UI
         private void ViewOrderHistory(Customer cust)
         {
             List<Order> myOrders = _bl.ListOfOrdersByCust(cust);
+            List<LineItem> myLineItems = _bl.LineItemsList();
             List<Product> prodList = _bl.ProductsList();
-            // var tempOrdHist = from m1 in prodList 
-                // join m2 in myOrders on m1.ProductID equals m2.ProductId
-                // select new {m1.ProductID, m2.Name, m1.Quantity, m2.Price,m2.Genre, m2.Description};
+                var tempOrdHist = from m1 in myLineItems 
+                join m2 in prodList on m1.ProductID equals m2.ProductId
+                join m3 in myOrders on m1.OrderID equals m3.OrderId
+                orderby m3.Date ascending
+                select new {m3.OrderId, m3.Date, m3.StoreID, m1.Quantity, m1.ProductID, m2.Name,  m2.Price, m2.Genre, m2.Description, m3.Total};
+                foreach(Order ord in myOrders){
+                    Console.WriteLine("**********************************************************");
+                    Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}");
+                    Console.WriteLine("**********************************************************");
+                    foreach (var item in tempOrdHist)
+                        if(item.OrderId == ord.OrderId)
+                        {
+                            {
+                        System.Console.WriteLine($"Product Quantity Purchased: {item.Quantity}\nProduct Name: {item.Name}\nProduct Id: {item.ProductID}\nProduct Price: {item.Price:C}\nProduct Genre: {item.Genre}\nProduct Description: {item.Description}\n");
+                        Console.WriteLine("----------------------------------------------------------");;
+                        }
+                        }
+                    Console.WriteLine("**********************************************************");
+                    System.Console.WriteLine($" Order Total:{ord.Total:C}");
+                    Console.WriteLine("**********************************************************");
+                }
         }
-
-       
-    
     }
 }
