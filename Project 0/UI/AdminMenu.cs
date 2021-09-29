@@ -55,19 +55,21 @@ namespace UI
             Console.WriteLine("Enter Customer Name");
             string useName = Console.ReadLine().ToLower().Trim();
             List<Customer> existingCust = _bl.FindOneCustomer(useName);
-            foreach(Customer user in existingCust){
-                if (!user.UserName.ToLower().Trim().Contains(useName) || !user.Name.ToLower().Trim().Contains(useName))
-                {
-                    System.Console.WriteLine("That is not an existing Customer please try another name");
-                    return;
+            // foreach(Customer user in existingCust){
+            //     if (!user.UserName.ToLower().Trim().Contains(useName) || !user.Name.ToLower().Trim().Contains(useName))
+            //     {
+            //         System.Console.WriteLine("That is not an existing Customer please try another name");
+            //         return;
                     
-                }
-                break; 
-            }
-            loggedIn.AddRange(existingCust.Where(c => c.UserName.Trim().ToLower().Equals(useName)|| c.Name.Trim().ToLower().Contains(useName)));
-            foreach (var item in loggedIn)
+            //     }
+            //     break; 
+            // }
+            //loggedIn.AddRange(existingCust);
+            foreach (var item in existingCust)
             {
+                Console.WriteLine("==========================================================");
                 System.Console.WriteLine(item);
+                Console.WriteLine("==========================================================");
             }
             
         }

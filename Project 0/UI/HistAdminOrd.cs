@@ -98,7 +98,7 @@ namespace UI
                 select new {m2.Address, custName =m1.Name, m1.UserName, storeName= m2.Name, storeAd= m2.Address, m3.OrderId, m3.Date, m3.Total,m1.CustomerDefaultStoreID};
                 foreach(var ord in tempCustByStore){
                     Console.WriteLine("**********************************************************");
-                    Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\n Customer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
+                    Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\nCustomer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
                     Console.WriteLine("**********************************************************");
                     foreach (var item in tempOrdHist)
                     {
@@ -128,16 +128,23 @@ namespace UI
             Console.WriteLine("Enter Customer Name");
             string useName = Console.ReadLine().ToLower().Trim();
             List<Customer> existingCust = _bl.FindOneCustomer(useName);
-            foreach(Customer user in existingCust){
-                if (user.UserName.ToLower().Trim().Contains(useName) || user.Name.ToLower().Trim().Contains(useName))
-                {
-                    loggedIn = existingCust.Where(c => c.UserName.Trim().ToLower().Equals(useName)|| c.Name.Trim().ToLower().Contains(useName)).FirstOrDefault();
-                    break;
-                }
-                    System.Console.WriteLine("That is not an existing Customer please try another name");
+            if (existingCust.Any(x => x.UserName.ToLower().Trim().Contains(useName) || x.Name.ToLower().Trim().Contains(useName)))
+            {
+                System.Console.WriteLine("That is not an existing Customer please try another name");
                     return;
-                
             }
+           
+                loggedIn = existingCust.Where(c => c.UserName.Trim().ToLower().Equals(useName) || c.Name.Trim().ToLower().Contains(useName)).FirstOrDefault();
+           
+            // foreach(Customer user in existingCust){
+            //     if (user.UserName.ToLower().Trim().Contains(useName) || user.Name.ToLower().Trim().Contains(useName))
+            //     {
+            //         loggedIn = existingCust.Where(c => c.UserName.Trim().ToLower().Equals(useName)|| c.Name.Trim().ToLower().Contains(useName)).FirstOrDefault();
+            //         break;
+            //     }
+                   
+                
+            // }
             
             List <StoreFront> chooseStore = _bl.GetStoreFronts();
             List<Order> allOrders = _bl.ListOrder();
@@ -160,7 +167,7 @@ namespace UI
                     if(ord.UserName.ToLower().Trim().Contains(loggedIn.UserName.Trim().ToLower()))
                         {
                         Console.WriteLine("**********************************************************");
-                        Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\n Customer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
+                        Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\nCustomer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
                         Console.WriteLine("**********************************************************");
                             foreach (var item in tempOrdHist)
                             {
@@ -203,7 +210,7 @@ namespace UI
                 foreach(var ord in tempCustByStore){
                     
                         Console.WriteLine("**********************************************************");
-                        Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\n Customer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
+                        Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\nCustomer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
                         Console.WriteLine("**********************************************************");
                             foreach (var item in tempOrdHist)
                             {
@@ -246,7 +253,7 @@ namespace UI
                 foreach(var ord in tempCustByStore){
                     
                         Console.WriteLine("**********************************************************");
-                        Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\n Customer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
+                        Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\nCustomer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
                         Console.WriteLine("**********************************************************");
                             foreach (var item in tempOrdHist)
                             {
@@ -289,7 +296,7 @@ namespace UI
                 foreach(var ord in tempCustByStore){
                     
                         Console.WriteLine("**********************************************************");
-                        Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\n Customer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
+                        Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\nCustomer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
                         Console.WriteLine("**********************************************************");
                             foreach (var item in tempOrdHist)
                             {
@@ -332,7 +339,7 @@ namespace UI
                 foreach(var ord in tempCustByStore){
                     
                         Console.WriteLine("**********************************************************");
-                        Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\n Customer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
+                        Console.WriteLine($"Order ID: {ord.OrderId} Order Date: {ord.Date}\nCustomer Name: {ord.custName}\nStoreID:{ord.CustomerDefaultStoreID}\nStoreName:{ord.storeName}\nStore Address: {ord.storeAd}");
                         Console.WriteLine("**********************************************************");
                             foreach (var item in tempOrdHist)
                             {
