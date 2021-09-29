@@ -31,12 +31,10 @@ namespace UI
                     return new RegisterMenu(new BL(new Repo(context)));
                 case "log in":
                     return new LogInMenu(new BL(new Repo(context)));
-                // case "admin":
-                    // return new AdminMenu(new BL(new Repo(context)));
-                    case "account":
-                    // return new CustomerNavigation(new BL(new Repo(context)), new Models.Customer());
-                // case "order menu":
-                //     return new OrderMenu(new BL(new Repo(context)));
+                case "hist":
+                    return new HistAdminOrd(new BL(new Repo(context)));
+                case "admin":
+                    return new AdminMenu(new BL(new Repo(context)));
                 default:
                     return null;
             }
@@ -65,10 +63,10 @@ namespace UI
                     return new CustomerNavigation(new BL(new Repo(context)));
                     case "order menu":
                     return new OrderMenu(new BL(new Repo(context)));
-                    // case "shopping":
-                    // return new ShoppingCart(new BL(new Repo(context)));
-                    //  case
-                    // return new OrderMenu(new BL(new Repo(context)));
+                    
+                    
+                    
+                    
                     //  case
                     // return new OrderMenu(new BL(new Repo(context)));
                     //  case:

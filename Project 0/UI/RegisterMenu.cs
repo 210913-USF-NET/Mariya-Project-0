@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Models;
 using StoreBL;
 
@@ -58,8 +59,9 @@ namespace UI
                     System.Console.WriteLine("That Name is already registered please log in or enter a different name");
                     return;
                 }
+                else newCustomer.Name = name;
             }
-            newCustomer.Name = name;
+            
             if(existingCust == null || existingCust.Count == 0)
             {
                 Console.WriteLine("No such users :/");
@@ -74,19 +76,20 @@ namespace UI
                     System.Console.WriteLine("That User Name is already registered please log in or enter a different name");
                     return;
                 }
-                else if (!user.UserName.ToLower().Trim().Equals("admin")){
-                    System.Console.WriteLine("You are trying to register Admin that is not possible");
-                    return;
+                else
+                {
+                    newCustomer.UserName = userName;
                 }
-            }
-            newCustomer.UserName = userName;
+                }
+            
+            
             Console.WriteLine("\nEnter a password: ");
             newCustomer.Password = Console.ReadLine();
             Console.WriteLine("\nEnter an email address: ");
             newCustomer.Email = Console.ReadLine();
             Console.WriteLine("\nEnter your Address :");
             newCustomer.Address = Console.ReadLine();
-            findStore:
+            
             System.Console.WriteLine("List of stores available:");
             foreach (var item in chooseStore)
             {
@@ -94,12 +97,10 @@ namespace UI
             }
             Console.WriteLine("Enter your preferred StoreID:");
             int store = Convert.ToInt32(Console.ReadLine());
-            foreach (var item in chooseStore)
+            if (!chooseStore.Any(x => x.StoreID == store))
             {
-                if(!(store == item.StoreID)){
-                    System.Console.WriteLine("That is not a valid entry try again");
-                    goto findStore;
-                }
+                Console.WriteLine("That is not a valid entry try again");
+                return;
             }
             newCustomer.CustomerDefaultStoreID = store;
             Customer addedCustomer = _bl.AddCustomer(newCustomer);

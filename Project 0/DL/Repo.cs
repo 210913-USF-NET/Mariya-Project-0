@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Models;
 using System.Linq;
@@ -17,11 +17,14 @@ namespace DL
         {
             _context = context;
         }
-
+/// <summary>
+/// Takes created model customer and converts to Entity customer then returns once customer has been added to DB
+/// </summary>
+/// <param name="newCustomer">model created from user input</param>
+/// <returns>Return customer obj once it's been added to DB</returns>
         public Models.Customer AddCustomer(Models.Customer newCustomer)
         {
             Entity.Customer customerToAdd = new Entity.Customer(){
-               // CustomerId = newCustomer.CustomerId, ----should I add or just get from DB?
                 CustomerName = newCustomer.Name,
                 CustomerEmail = newCustomer.Email,
                 CustomerUserName = newCustomer.UserName,
@@ -44,10 +47,14 @@ namespace DL
                 CustomerDefaultStoreID= customerToAdd.CustomerStore
             };
         }
-
-        public List<Customer> FindOneCustomer(string qryString)
+/// <summary>
+/// Searches DB for any customers with name or username like input
+/// </summary>
+/// <param name="qryString">name string to get from user input in console</param>
+/// <returns>List Of Customers with matching names</returns>
+        public List<Models.Customer> FindOneCustomer(string qryString)
         {
-            return _context.Customers.Where(u => u.CustomerUserName.Contains(qryString) || u.CustomerName.Contains(qryString)).Select(
+            return _context.Customers.Where(u => u.CustomerUserName.ToLower().Trim().Contains(qryString.ToLower().Trim()) || u.CustomerName.ToLower().Trim().Contains(qryString.ToLower().Trim())).Select(
                 x => new Models.Customer(){
                     CustomerId = x.CustomerId,
                     Name = x.CustomerName,
@@ -59,7 +66,11 @@ namespace DL
             }
             ).ToList();
         }
-
+/// <summary>
+/// Returns model store by inputting customer default store
+/// </summary>
+/// <param name="cust"> obj that is passed around while still logged in</param>
+/// <returns>StoreFront Obj</returns>
         public StoreFront GetMyStore(Customer cust)
         {
             Entity.StoreFront myStore = _context.StoreFronts.FirstOrDefault(x => x.StoreId == cust.CustomerDefaultStoreID);
@@ -70,7 +81,11 @@ namespace DL
                 Address = myStore.StoreAddress
             };
         }
-
+/// <summary>
+/// Returns list of Customers by using customer obj passed in getting list where cust store == inventory store
+/// </summary>
+/// <param name="newCustomer">bj that is passed around while still logged in</param>
+/// <returns>List of inventory items by customer default store</returns>
         public List<Inventory> GetInventoryByStoreID(Customer newCustomer)
         {   
             return  _context.Inventories.Where(y => y.InvenStoreId== newCustomer.CustomerDefaultStoreID).Select(i => new Models.Inventory()
@@ -151,14 +166,8 @@ namespace DL
 
                 updatedInventory.InventoryQuantity = item.Quantity;
             }
-            // List<Entity.Inventory> InvenToUpdate = items.Select(i => Entity.Inventory(){
-            //     InvenStoreId = i.StoreID,
-            //     InvenProductId = i.ProductID,
-            //     InventoryQuantity = i.Quantity}).ToList();
-                
-            // _context.Inventories.UpdateRange(InvenToUpdate);
             _context.SaveChanges();
-            // _context.ChangeTracker.Clear();
+            _context.ChangeTracker.Clear();
         }
         public void AddLineItems(List<LineItem> items)
         {
@@ -172,22 +181,8 @@ namespace DL
             };
             lineToAdd = _context.Add(lineToAdd).Entity;
             }
-            // List<Entity.Inventory> InvenToUpdate = items.Select(i => Entity.Inventory(){
-            //     InvenStoreId = i.StoreID,
-            //     InvenProductId = i.ProductID,
-            //     InventoryQuantity = i.Quantity}).ToList();
-                
-            // _context.Inventories.UpdateRange(InvenToUpdate);
+            
             _context.SaveChanges();
-            // List<Entity.LineItem> itemsToAdd = items.Select(i => new Entity.LineItem(){
-            //     LineOrderId = i.OrderID,
-            //     LineStoreId = i.StoreId,
-            //     LineInvenProdId = i.ProductID,
-            //     OrderProductQantity = i.Quantity}).ToList();
-                
-            // _context.LineItems.AddRange(itemsToAdd);
-            // _context.SaveChanges();
-            // _context.ChangeTracker.Clear();
         }
 
         public List<Order> ListOfOrdersByCust(Customer cust)
@@ -238,6 +233,39 @@ namespace DL
             }
             ).ToList();
         }
-    }
 
+    public Models.Customer CustomerStoreUpdate(Models.Customer cust)
+        {
+            
+            
+                
+                Entities.Customer updatedCust = (from i in _context.Customers
+                    where i.CustomerId == cust.CustomerId
+                    select i).FirstOrDefault();
+                updatedCust.CustomerStore = cust.CustomerDefaultStoreID;
+            
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Models.Customer(){
+                CustomerId = updatedCust.CustomerId,
+                Name = updatedCust.CustomerName,
+                Email = updatedCust.CustomerEmail,
+                UserName = updatedCust.CustomerUserName,
+                Password = updatedCust.CustomerPassWord,
+                Address = updatedCust.CustomerAddress,
+                CustomerDefaultStoreID= updatedCust.CustomerStore
+            };
+        }
+
+        public List<Inventory> GetInventoryForAdmin(int input)
+        {
+            return  _context.Inventories.Where(y => y.InvenStoreId== input).Select(i => new Models.Inventory()
+            {
+                StoreID = i.InvenStoreId,
+                Quantity = i.InventoryQuantity,
+                ProductID = i.InvenProductId,
+            }).ToList();
+        }
+    }
 }

@@ -78,5 +78,15 @@ namespace StoreBL
         {
             return _repo.GetAllCustomers();
         }
+
+        public Customer CustomerStoreUpdate(Customer cust)
+        {
+            return _repo.CustomerStoreUpdate(cust);
+        }
+
+        public List<Inventory> GetInventoryForAdmin(int input)
+        {
+            return _repo.GetInventoryForAdmin(input);
+        }
     }
 }

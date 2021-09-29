@@ -48,7 +48,7 @@ namespace UI
         }
 
         private void ValidateExistingCustomer(){
-            
+            Customer loggedIn = new Customer();
             Console.WriteLine("\nEnter your username");
             string useName = Console.ReadLine().ToLower().Trim();
             List<Customer> existingCust = _bl.FindOneCustomer(useName);
@@ -58,6 +58,7 @@ namespace UI
                     System.Console.WriteLine("That is not a valid username please input a correct username or Register as a new user");
                     return;
                 }
+                loggedIn = existingCust.Where(c => c.UserName.Trim().ToLower().Equals(useName)).FirstOrDefault();
             }
             if(existingCust == null || existingCust.Count == 0)
             {
@@ -67,8 +68,8 @@ namespace UI
                 ValidateAdmin();
             }
 
-            Customer loggedIn = new Customer();
-            loggedIn = existingCust.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
+            
+            
             Console.WriteLine("**********************************************************");
             Console.WriteLine($"           Welcome {loggedIn.Name}!");
             Console.WriteLine("**********************************************************");
@@ -81,7 +82,8 @@ namespace UI
             
         }
 
-         private void ValidateAdmin(){
+        private void ValidateAdmin(){
+            Customer loggedIn = new Customer();
             Console.WriteLine("Enter Administrator Log In");
             string useName = Console.ReadLine().ToLower().Trim();
             List<Customer> existingCust = _bl.FindOneCustomer(useName);
@@ -91,6 +93,7 @@ namespace UI
                     System.Console.WriteLine("Please enter Admin log in credentials");
                     return;
                 }
+                loggedIn = existingCust.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
             }
             if(existingCust == null || existingCust.Count == 0)
             {
@@ -98,9 +101,7 @@ namespace UI
                 return;
             }
             
-            Customer loggedIn = new Customer();
-            loggedIn = existingCust.Where(c => c.UserName.Equals(useName)).FirstOrDefault();
-            MenuFactory.GetMenuCust("admin").Start(loggedIn);
+            MenuFactory.GetMenu("Admin").Start();
         }
     }
 }

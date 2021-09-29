@@ -24,7 +24,7 @@ namespace UI
             {
                 Console.WriteLine("[1] Start a new cart");
                 Console.WriteLine("[2] View shopping history");
-                Console.WriteLine("[3] Change your default store");
+                // Console.WriteLine("[3] Change your default store");
                 Console.WriteLine("[x] Exit");
                 input = Console.ReadLine();
 
@@ -36,9 +36,9 @@ namespace UI
                     case "2":
                         ViewOrderHistory(shopper);
                         break;
-                        case "3":
-                        shopper = ChangeCustomerStore(shopper);
-                        break;
+                        // case "3":
+                        // shopper = ChangeCustomerStore(shopper);
+                        // break;
                     case "x":
                         Console.WriteLine("Thank you");
                         exit = true;
@@ -50,21 +50,27 @@ namespace UI
             } while (!exit);
         }
 
-        private Customer ChangeCustomerStore(Customer cust)
-        {
-            List <StoreFront> chooseStore = _bl.GetStoreFronts();
-            System.Console.WriteLine($"Your current StoreID is: {cust.CustomerDefaultStoreID}");
-            System.Console.WriteLine("List of stores available:");
-            foreach (var item in chooseStore)
-            {
-                System.Console.WriteLine(item);
-            }
-            Console.WriteLine("Enter your preferred StoreID:");
-            int store = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"You entered store ID: {store}\nYour Profile has been updated. ");
-            cust.CustomerDefaultStoreID = store;
-            return cust;
-        }
+        // private Customer ChangeCustomerStore(Customer cust)
+        // {
+        //     List <StoreFront> chooseStore = _bl.GetStoreFronts();
+        //     System.Console.WriteLine($"Your current StoreID is: {cust.CustomerDefaultStoreID}");
+        //     System.Console.WriteLine("List of stores available:");
+        //     foreach (var item in chooseStore)
+        //     {
+        //         System.Console.WriteLine(item);
+        //     }
+        //     Console.WriteLine("Enter your preferred StoreID:");
+        //     int store = Convert.ToInt32(Console.ReadLine());
+        //     if (!chooseStore.Any(x => x.StoreID == store))
+        //     {
+        //         Console.WriteLine("That is not a valid entry try again");
+        //         return null;
+        //     }
+        //     Console.WriteLine($"You entered store ID: {store}\nYour Profile has been updated. ");
+        //     cust.CustomerDefaultStoreID = store;
+        //     cust = _bl.CustomerStoreUpdate(cust);
+        //     return cust;
+        // }
 
         private void ViewOrderHistory(Customer cust)
         {

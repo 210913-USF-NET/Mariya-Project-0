@@ -12,6 +12,7 @@ namespace DL
         Customer AddCustomer(Customer newCustomer);
         List<Product> ProductsList();
         List<Inventory> GetInventoryByStoreID(Customer newCustomer);
+        List<Inventory> GetInventoryForAdmin(int input);
         List<StoreFront> GetStoreFronts();
         StoreFront GetMyStore(Customer cust);
         Product GetProduct(int input);
@@ -21,6 +22,7 @@ namespace DL
         List<Order> ListOfOrdersByCust(Customer cust);
         List<Order> ListOrder();
         List<LineItem> LineItemsList();
+        Models.Customer CustomerStoreUpdate(Models.Customer cust);
 
     }
 }

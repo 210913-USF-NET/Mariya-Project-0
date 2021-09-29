@@ -19,6 +19,8 @@ namespace StoreBL
         List<Order> ListOfOrdersByCust(Customer cust);
         List<LineItem> LineItemsList();
         List<Order> ListOrder();
+        Models.Customer CustomerStoreUpdate(Models.Customer cust);
+        List<Inventory> GetInventoryForAdmin(int input);
         
 
     }
