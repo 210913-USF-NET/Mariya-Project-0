@@ -4,7 +4,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 ConnectionString.txt
-C:\Users\mariy\OneDrive\Desktop\Juniper Batch\MariyaCode\Project 0\Resources
+..\Resources
 # User-specific files
 *.rsuser
 *.suo
